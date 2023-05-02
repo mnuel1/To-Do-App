@@ -1,5 +1,5 @@
 # To Do App 
-This project is a To Do application created with C++ programming language and Qt Framework. The goal of this application is to provide an easy-to-use interface for managing tasks and keeping track of deadlines.
+This project is a To Do application created with C++ programming language and Qt Framework. The goal of this application is to provide an easy-to-use interface for managing tasks and keeping track of deadlines. This application is inspired in Microsoft Todo.
 
 ## Current Features
 - Add and edit tasks
