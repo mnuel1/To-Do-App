@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Release-a2929027622711915049.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "todo",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "todo::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-todo-Release-b15590b90b23338badc2.json",
+					"name" : "todo",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "todo_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-todo_autogen-Release-a6731bd26f7853def705.json",
+					"name" : "todo_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "todo_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-todo_autogen_timestamp_deps-Release-ee5157f40685eb9037ad.json",
+					"name" : "todo_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/Manuel Marin/Desktop/man/proj/todo/build-todo-Desktop_Qt_6_4_1_MinGW_64_bit-Release",
+		"source" : "C:/Users/Manuel Marin/Desktop/man/proj/todo/todo"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}
