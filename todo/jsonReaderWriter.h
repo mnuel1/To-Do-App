@@ -21,6 +21,7 @@ public:
     void write(const QString filename,const QJsonObject obj);
 
     void createList(const QString name);
+    void editList(const QString filename, const QString key, const QString value);
 
     void writeTask(const QString filename,const QString name);
     void editTaskName(const QString filename,const QString taskname,const QString newname);

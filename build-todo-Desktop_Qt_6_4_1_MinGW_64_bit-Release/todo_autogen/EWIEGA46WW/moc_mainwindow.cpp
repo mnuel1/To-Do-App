@@ -27,20 +27,19 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 namespace {
 struct qt_meta_stringdata_MainWindow_t {
-    uint offsetsAndSizes[26];
+    uint offsetsAndSizes[24];
     char stringdata0[11];
     char stringdata1[20];
     char stringdata2[1];
     char stringdata3[20];
     char stringdata4[20];
-    char stringdata5[25];
-    char stringdata6[8];
-    char stringdata7[7];
-    char stringdata8[13];
-    char stringdata9[9];
-    char stringdata10[14];
-    char stringdata11[8];
-    char stringdata12[11];
+    char stringdata5[8];
+    char stringdata6[7];
+    char stringdata7[13];
+    char stringdata8[9];
+    char stringdata9[14];
+    char stringdata10[8];
+    char stringdata11[11];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_MainWindow_t::offsetsAndSizes) + ofs), len 
@@ -51,21 +50,19 @@ Q_CONSTINIT static const qt_meta_stringdata_MainWindow_t qt_meta_stringdata_Main
         QT_MOC_LITERAL(31, 0),  // ""
         QT_MOC_LITERAL(32, 19),  // "on_maxi_btn_clicked"
         QT_MOC_LITERAL(52, 19),  // "on_exit_btn_clicked"
-        QT_MOC_LITERAL(72, 24),  // "on_pushButton_18_clicked"
-        QT_MOC_LITERAL(97, 7),  // "hoverIn"
-        QT_MOC_LITERAL(105, 6),  // "object"
-        QT_MOC_LITERAL(112, 12),  // "btnEffectsIn"
-        QT_MOC_LITERAL(125, 8),  // "hoverOut"
-        QT_MOC_LITERAL(134, 13),  // "btnEffectsOut"
-        QT_MOC_LITERAL(148, 7),  // "clicked"
-        QT_MOC_LITERAL(156, 10)   // "btnClicked"
+        QT_MOC_LITERAL(72, 7),  // "hoverIn"
+        QT_MOC_LITERAL(80, 6),  // "object"
+        QT_MOC_LITERAL(87, 12),  // "btnEffectsIn"
+        QT_MOC_LITERAL(100, 8),  // "hoverOut"
+        QT_MOC_LITERAL(109, 13),  // "btnEffectsOut"
+        QT_MOC_LITERAL(123, 7),  // "clicked"
+        QT_MOC_LITERAL(131, 10)   // "btnClicked"
     },
     "MainWindow",
     "on_mini_btn_clicked",
     "",
     "on_maxi_btn_clicked",
     "on_exit_btn_clicked",
-    "on_pushButton_18_clicked",
     "hoverIn",
     "object",
     "btnEffectsIn",
@@ -83,7 +80,7 @@ Q_CONSTINIT static const uint qt_meta_data_MainWindow[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-      10,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -91,27 +88,25 @@ Q_CONSTINIT static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   74,    2, 0x08,    1 /* Private */,
-       3,    0,   75,    2, 0x08,    2 /* Private */,
-       4,    0,   76,    2, 0x08,    3 /* Private */,
-       5,    0,   77,    2, 0x08,    4 /* Private */,
-       6,    1,   78,    2, 0x0a,    5 /* Public */,
-       8,    2,   81,    2, 0x0a,    7 /* Public */,
-       9,    1,   86,    2, 0x0a,   10 /* Public */,
-      10,    2,   89,    2, 0x0a,   12 /* Public */,
-      11,    1,   94,    2, 0x0a,   15 /* Public */,
-      12,    2,   97,    2, 0x0a,   17 /* Public */,
+       1,    0,   68,    2, 0x08,    1 /* Private */,
+       3,    0,   69,    2, 0x08,    2 /* Private */,
+       4,    0,   70,    2, 0x08,    3 /* Private */,
+       5,    1,   71,    2, 0x0a,    4 /* Public */,
+       7,    2,   74,    2, 0x0a,    6 /* Public */,
+       8,    1,   79,    2, 0x0a,    9 /* Public */,
+       9,    2,   82,    2, 0x0a,   11 /* Public */,
+      10,    1,   87,    2, 0x0a,   14 /* Public */,
+      11,    2,   90,    2, 0x0a,   16 /* Public */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::QObjectStar,    7,
+    QMetaType::Void, QMetaType::QObjectStar,    6,
     QMetaType::Void, QMetaType::Int, QMetaType::QObjectStar,    2,    2,
-    QMetaType::Void, QMetaType::QObjectStar,    7,
+    QMetaType::Void, QMetaType::QObjectStar,    6,
     QMetaType::Void, QMetaType::Int, QMetaType::QObjectStar,    2,    2,
-    QMetaType::Void, QMetaType::QObjectStar,    7,
+    QMetaType::Void, QMetaType::QObjectStar,    6,
     QMetaType::Void, QMetaType::Int, QMetaType::QObjectStar,    2,    2,
 
        0        // eod
@@ -131,8 +126,6 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         // method 'on_maxi_btn_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_exit_btn_clicked'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_pushButton_18_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'hoverIn'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
@@ -168,13 +161,12 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 0: _t->on_mini_btn_clicked(); break;
         case 1: _t->on_maxi_btn_clicked(); break;
         case 2: _t->on_exit_btn_clicked(); break;
-        case 3: _t->on_pushButton_18_clicked(); break;
-        case 4: _t->hoverIn((*reinterpret_cast< std::add_pointer_t<QObject*>>(_a[1]))); break;
-        case 5: _t->btnEffectsIn((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QObject*>>(_a[2]))); break;
-        case 6: _t->hoverOut((*reinterpret_cast< std::add_pointer_t<QObject*>>(_a[1]))); break;
-        case 7: _t->btnEffectsOut((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QObject*>>(_a[2]))); break;
-        case 8: _t->clicked((*reinterpret_cast< std::add_pointer_t<QObject*>>(_a[1]))); break;
-        case 9: _t->btnClicked((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QObject*>>(_a[2]))); break;
+        case 3: _t->hoverIn((*reinterpret_cast< std::add_pointer_t<QObject*>>(_a[1]))); break;
+        case 4: _t->btnEffectsIn((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QObject*>>(_a[2]))); break;
+        case 5: _t->hoverOut((*reinterpret_cast< std::add_pointer_t<QObject*>>(_a[1]))); break;
+        case 6: _t->btnEffectsOut((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QObject*>>(_a[2]))); break;
+        case 7: _t->clicked((*reinterpret_cast< std::add_pointer_t<QObject*>>(_a[1]))); break;
+        case 8: _t->btnClicked((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QObject*>>(_a[2]))); break;
         default: ;
         }
     }
@@ -199,13 +191,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 10)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 10;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 10)
+        if (_id < 9)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 10;
+        _id -= 9;
     }
     return _id;
 }

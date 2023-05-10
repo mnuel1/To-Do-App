@@ -78,7 +78,7 @@ void JsonReaderWriter::createList(const QString name)
     fileCreator(name);
 
     QJsonObject list;
-    list["title"]          = name;      //initialize the title
+    list["title"]          = name;          //initialize the title
     list["icon"]           = "";            //icon will be default
     list["theme"]          = "";            //theme will be default
 
@@ -88,6 +88,29 @@ void JsonReaderWriter::createList(const QString name)
 
     //'name' of the new list will be the name of the file
     write(name,list);
+}
+void JsonReaderWriter::editList(const QString filename, const QString key, const QString value)
+{
+    QJsonDocument doc = read(filename + ".json");
+
+    QJsonObject obj = doc.object();
+
+    obj[key] = value;
+    write(filename,obj);
+
+    //in changing the list name/title, rename the file too
+    if(key == "title"){
+        //rename the file
+        QFile file(default_path + filename + ".json");
+
+        QString newname = default_path + value + ".json";
+        file.rename(newname);
+
+        //!! add a error handler?
+
+    }
+
+
 }
 
 void JsonReaderWriter::writeTask(const QString filename,const QString name)
@@ -135,15 +158,18 @@ void JsonReaderWriter::editTaskName(const QString filename,const QString tasknam
 
     QJsonArray tasks = obj["tasks"].toArray();      // Access the tasks array
 
-    for (auto task : tasks) {
-        QJsonObject taskObj = task.toObject();
+    for (int i = 0; i < tasks.size(); ++i) {
+        QJsonObject taskObj = tasks[i].toObject();
 
         if(taskObj["task_name"].toString() == taskname){
+
             taskObj["task_name"] = newname;         //replace the name
-            obj["tasks"] = tasks;                   //update the task
+            tasks.replace(i,taskObj);               //replace the object
             break;
         }
     }
+    obj["tasks"] = tasks;                           //update the task
+
     write(filename,obj);                            //update the json file
 
 }
@@ -235,28 +261,28 @@ void JsonReaderWriter::editStepName(const QString filename, const QString taskna
     //get the tasks
     QJsonArray tasks = obj["tasks"].toArray();
 
-    int done = 0;
+    for (int i = 0; i < tasks.size(); ++i) {
+        QJsonObject taskitem = tasks[i].toObject();
 
-    for(auto task : tasks){
-        QJsonObject taskitem = task.toObject();
+        if (taskitem["task_name"].toString() == taskname) {
+            QJsonArray steps = taskitem["steps"].toArray();
 
-        if(taskitem["task_name"].toString() == taskname){
-            QJsonArray steps = taskitem["steps"].toArray(); //get the steps array
-            // find the step that will gonna be editted
-            for(auto step : steps){
-                QJsonObject stepObj = step.toObject();
+            for (int j = 0; j < steps.size(); ++j) {
+                QJsonObject stepObj = steps[j].toObject();
 
-                if(stepObj["step"].toString() == stepname){
-                    stepObj["step"] = newname;      //replace with newname
-                    step = stepObj;
-                    done = 1;
-                    break;
+                if (stepObj["step"].toString() == stepname) {
+                    stepObj["step"] = newname;      //update the name
+                    steps.replace(j, stepObj);      //replace the specific index in the steps
+                    taskitem["steps"] = steps;      //update the item task[steps]
+                    tasks.replace(i, taskitem);     //replace the specific index in the tasks
+
+                    // Task and step found and updated
+                    goto done;
                 }
             }
         }
-        if(done) break;
     }
-
+    done:
     obj["tasks"] = tasks;
 
     write(filename,obj);

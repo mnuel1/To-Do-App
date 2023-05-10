@@ -146,27 +146,15 @@ void MainWindow::showOrHideMenu()
     }else showHideMenuIcon(currentPage,3);
 }
 
-void MainWindow::spawnEdittableWidget(int val, QObject* object, QVBoxLayout* fLayout,int widgetT)
+QString MainWindow::getFilename(QWidget *currentPage)
 {
-    // create the text edittable button for adding new list
-    // 0 = new list, 1 = add task, 2 = add step
-    if(newwidget == nullptr){
-        if(widgetT == 0){
-            newwidget = listform->create_newlist();
-        }else if (widgetT == 1){
-            newwidget = listform->create_addtask();
-        }else newwidget = listform->create_addstep();
-    }
-    oldframe = qobject_cast<QFrame*>(object);           // store the newlist btn
+    //get the filename
+    currentPage = ui->content_widgets->currentWidget();
+    QString filename = currentPage->objectName();
+    QStringList list = filename.split("_");
+    filename = list.at(1);
 
-    btnEffectsOut(val,oldframe);                        // remove the btn effect in the newlist btn
-
-    lineEdit = newwidget->findChild<QLineEdit *>();     // get the line edit in the frame
-
-    fLayout->replaceWidget(oldframe,newwidget);          // replace the newlist btn with editable txt newlist btn
-    oldframe->setVisible(false);
-    layout = fLayout;
-    lineEdit->setFocus();
+    return filename;
 
 }
 
@@ -300,7 +288,7 @@ void MainWindow::btnEffectsIn(int val,QObject *object)
         case 10:{   //addtask
                     ((QWidget*)object)->setStyleSheet("text-align:left;padding:10px;border-radius:5px;background:#e9ecef;color:black;");
                     break;
-                }
+                }       
         case 11:{   //icon edit
                     QPushButton* icon_edit = qobject_cast<QPushButton*>(object);
 
@@ -309,14 +297,10 @@ void MainWindow::btnEffectsIn(int val,QObject *object)
                     }
                     break;
                 }
-        case 12:{   //textedit
-                    QLineEdit *lineEdit = qobject_cast<QLineEdit*>(object);
-
-                    if(lineEdit){
-                        lineEdit->setStyleSheet("background:#e9ecef;padding:6px;border-radius:5;");
-
-                    }
-
+        case 15:    //textedit listname
+        case 16:    //textedot taskname
+        case 12:{   //textedit stepname
+                    ((QWidget*)object)->setStyleSheet("background:#e9ecef;padding:6px;border-radius:2;");
                     break;
                 }
         case 13:{   //ticket
@@ -393,12 +377,10 @@ void MainWindow::btnEffectsOut(int val,QObject *object)
                     }
                     break;
                 }
-        case 12:{   //textedit
-                    QLineEdit *lineEdit = qobject_cast<QLineEdit*>(object);
-
-                    if(lineEdit){
-                        lineEdit->setStyleSheet("padding:6px;border-radius:5;");
-                    }
+        case 15:    //textedit listname
+        case 16:    //textedot taskname
+        case 12:{   //textedit stepname
+                    ((QWidget*)object)->setStyleSheet("padding:6px;border-radius:2;");
                     break;
                 }
         case 13:{   //ticket
@@ -419,7 +401,7 @@ void MainWindow::btnEffectsOut(int val,QObject *object)
 
 void MainWindow::btnClicked(int val, QObject* object)
 {
-    JsonReaderWriter finder;
+    JsonReaderWriter json;
     btnEffectsIn(val,object);
     switch(val)
     {
@@ -440,19 +422,26 @@ void MainWindow::btnClicked(int val, QObject* object)
                     break;
                 }
         case 2: {   //list btn
-                    //if there is an editing that is currently happening
-                    //mark it done then create a new edditable widget
 
-                    addType = 0;
-                    if(newwidget != nullptr){ // list btn
-
+                    // if there is pending text edit
+                    if (new_edit != nullptr) {
                         keyPressEvent(new QKeyEvent(QKeyEvent::KeyPress, Qt::Key_Enter, Qt::NoModifier));
+
+                    }else {
+
+                        // add new list
+                        new_edit = object->findChild<QLineEdit*>();
+
+                        if(new_edit){
+                            new_edit->setReadOnly(false);
+                            new_edit->setFocus();
+                            editType = 0;
+                        }
                     }
 
-                    spawnEdittableWidget(val,object,ui->menu_layout,0);
                     break;
                 }
-        case 3: {   //settings btn
+        case 3: {   //settings btn !!todo
                     btnEffectsOut(val,object);      //after clicking the settings btn just remove the effect
                     break;
                 }
@@ -467,16 +456,9 @@ void MainWindow::btnClicked(int val, QObject* object)
 
                     QString taskname = ((QLabel*)taskn)->text();
 
-                    QWidget* currentPage = ui->content_widgets->currentWidget();
-                    QString filename = currentPage->objectName();
-                    QStringList list = filename.split("_");
+                    QString filename = getFilename(ui->content_widgets->currentWidget());
 
-                    if(list.size() >= 2) {
-                        QString result = list.at(1); // access the second element
-                        filename = result;           // overwrites the the filename
-                    }
-
-                    QJsonObject obj = finder.getTaskInfo(filename, taskname);
+                    QJsonObject obj = json.getTaskInfo(filename, taskname);
 
                     QFrame* tPanel = page_creator->create_task_panel(obj);
                     ui->splitter->widget(2)->show();
@@ -507,24 +489,25 @@ void MainWindow::btnClicked(int val, QObject* object)
                     stopMovie();
 
                     auto it = done.find(object);
-                    QWidget* currentPage = ui->content_widgets->currentWidget();
-                    QString filename = currentPage->objectName();
-                    QStringList fList = filename.split("_");
-                    filename = fList.at(1);
+
+                    QString filename = getFilename(ui->content_widgets->currentWidget());
 
                     QStringList sList = object->objectName().split("_");
                     QString stepname = sList.last();
 
-                    if(it == done.end()){
-                        done.emplace(object);
+                    if(currentTask != ""){
 
-                        ((QPushButton*)object)->setIcon(QIcon(":/i/resources/icons/circle-checked.png"));
-                        finder.editDoneStep(filename,currentTask,stepname,true);
-                    }else{
+                        if(it == done.end()){
+                            done.emplace(object);
 
-                        finder.editDoneStep(filename,currentTask,stepname,false);
-                        btnEffectsOut(5,object);
-                        done.erase(it);
+                            ((QPushButton*)object)->setIcon(QIcon(":/i/resources/icons/circle-checked.png"));
+                            json.editDoneStep(filename,currentTask,stepname,true);
+                        }else{
+
+                            json.editDoneStep(filename,currentTask,stepname,false);
+                            btnEffectsOut(5,object);
+                            done.erase(it);
+                        }
                     }
 
                     break;
@@ -535,20 +518,19 @@ void MainWindow::btnClicked(int val, QObject* object)
 
                     auto it = done.find(object);
 
-                    QWidget* currentPage = ui->content_widgets->currentWidget();
-                    QString filename = currentPage->objectName();
-                    QStringList fList = filename.split("_");
-                    filename = fList.at(1);
+                    QString filename = getFilename(ui->content_widgets->currentWidget());
 
-                    if(it == done.end()){
-                        done.emplace(object);
-                        ((QPushButton*)object)->setIcon(QIcon(":/i/resources/icons/star_fill.png"));
-                        finder.editImportantTaskName(filename,currentTask,true);
+                    if(currentTask != ""){
+                        if(it == done.end()){
+                            done.emplace(object);
+                            ((QPushButton*)object)->setIcon(QIcon(":/i/resources/icons/star_fill.png"));
+                            json.editImportantTaskName(filename,currentTask,true);
 
-                    }else{
-                        finder.editImportantTaskName(filename,currentTask,false);
-                        btnEffectsOut(6,object);
-                        done.erase(it);
+                        }else{
+                            json.editImportantTaskName(filename,currentTask,false);
+                            btnEffectsOut(6,object);
+                            done.erase(it);
+                        }
                     }
 
                     break;
@@ -557,52 +539,122 @@ void MainWindow::btnClicked(int val, QObject* object)
                     ui->splitter->widget(2)->hide();
                     break;
                 }
-        case 9: {   //del btn
+        case 9: {   //del btn !!todo
                     break;
                 }
         case 10:{   //task btn
 
-                    // get the layout where the addbtn resides
-                    QLayout *l = qobject_cast<QFrame*>(object)->parentWidget()->layout();
-                    QVBoxLayout *vboxlayout = qobject_cast<QVBoxLayout*>(l);
-
-                    addType = 1;
-
-                    //if there is an editing that is currently happening
-                    //mark it done then create a new edditable widget
-                    if(newwidget != nullptr){                     
-
+                    // if there is pending text edit
+                    if (new_edit != nullptr) {
                         keyPressEvent(new QKeyEvent(QKeyEvent::KeyPress, Qt::Key_Enter, Qt::NoModifier));
+                    }else {
 
+                        //add new task
+                        new_edit = object->findChild<QLineEdit*>();
+
+                        if(new_edit){
+                            new_edit->setReadOnly(false);
+                            new_edit->setFocus();
+                            editType = 1;
+                        }
                     }
-                    spawnEdittableWidget(val,object,vboxlayout,1);
+
+
                     break;
                 }
-        case 11:{   //icon edit
+        case 11:{   //icon list edit !!todo !!add pop up option
+
+                    btnEffectsOut(11,object);
+                    QPushButton* icon = qobject_cast<QPushButton*>(object);
+
+                    if(icon) {
+
+                        QString filename = getFilename(ui->content_widgets->currentWidget());
+
+                        json.editList(filename,"icon",":/i/resources/icons/alarm-minus.png");
+                    }
+
                     break;
                 }
-        case 12:{   //textedit
+        case 12:{   //textedit step
+
+                    // if there is pending text edit
+                    if (new_edit != nullptr) {
+                        keyPressEvent(new QKeyEvent(QKeyEvent::KeyPress, Qt::Key_Enter, Qt::NoModifier));
+                    }else {
+
+                        // edit step name
+                        new_edit = object->findChild<QLineEdit*>();
+
+                        if(new_edit){
+                            currentStepname = new_edit->text();
+                            new_edit->setReadOnly(false);
+                            new_edit->setFocus();
+                            new_edit->selectAll();
+                            editType = 3;
+                        }
+                    }
                     break;
                 }
-        case 13:{   //ticket
+        case 13:{   //ticket !!todo
                     break;
                 }
         case 14:{   //step btn
 
-                    // get the layout where the addbtn resides
-                    QLayout *l = qobject_cast<QFrame*>(object)->parentWidget()->layout();
-                    QVBoxLayout *vboxlayout = qobject_cast<QVBoxLayout*>(l);
-                    addType = 2;
-                    //if there is an editing that is currently happening
-                    //mark it done then create a new edditable widget
-                    if(newwidget != nullptr){
-
+                    // if there is pending text edit
+                    if (new_edit != nullptr) {
                         keyPressEvent(new QKeyEvent(QKeyEvent::KeyPress, Qt::Key_Enter, Qt::NoModifier));
+                    }else {
+                        //add new step
+                        new_edit = object->findChild<QLineEdit*>();
+
+                        if(new_edit){
+                            new_edit->setReadOnly(false);
+                            new_edit->setFocus();
+                            editType = 2;
+                        }
 
                     }
+                    break;
+                }
+        case 15:{   //text edit list name
 
-                    spawnEdittableWidget(val,object,vboxlayout,2);
+                    // if there is pending text edit
+                    if (new_edit != nullptr) {
+                        keyPressEvent(new QKeyEvent(QKeyEvent::KeyPress, Qt::Key_Enter, Qt::NoModifier));
+                    }else {
 
+                        // edit list name
+                        new_edit = qobject_cast<QLineEdit*>(object);
+
+                        if(new_edit){
+                            currentListname = new_edit->text();
+                            new_edit->setReadOnly(false);
+                            new_edit->setFocus();
+                            new_edit->selectAll();
+                            editType = 4;
+                        }
+                    }
+                    break;
+                }
+        case 16:{   //text edit task name
+
+                    // if there is pending text edit
+                    if (new_edit != nullptr) {
+                        keyPressEvent(new QKeyEvent(QKeyEvent::KeyPress, Qt::Key_Enter, Qt::NoModifier));
+                    }else {
+
+                        // edit list name
+                        new_edit = object->findChild<QLineEdit*>();
+
+                        if(new_edit){
+                            currentTaskname = new_edit->text();
+                            new_edit->setReadOnly(false);
+                            new_edit->setFocus();
+                            new_edit->selectAll();
+                            editType = 5;
+                        }
+                    }
                     break;
                 }
         default: break;
@@ -631,9 +683,7 @@ void MainWindow::hoverIn(QObject *object)
 
             btnEffectsIn(val,object);
         }
-
     }
-
 
 }
 
@@ -681,7 +731,7 @@ void MainWindow::clicked(QObject *object)
 
         if (std::regex_search(str, match, rx)) {
             val = std::stoi(match[0]);
-           // qDebug() << val;
+            qDebug() << val;
 
         }
 
@@ -694,8 +744,6 @@ void MainWindow::clicked(QObject *object)
 void MainWindow::resizeEvent(QResizeEvent *event)
 {
     // This function is called whenever the main window is resized
-
-    qDebug() << "Main window resized to" << event->size().width() << "x" << event->size().height();
 
 
     if(event->size().width() <= 360){
@@ -737,70 +785,128 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 
 }
 
-void MainWindow::on_pushButton_18_clicked()
-{
-    QList<int> size;
-    size = ui->splitter->sizes();
-
-    for (auto s : size) {
-        qDebug() << s;
-    }
-
-}
-
-void MainWindow::addbtnType(QString text)
-{
-    switch(addType)
-    {
-        case 0: jreadwrite.createList(text); break; //list
-        case 1: {//task
-
-                    //file name is the name of the list
-                    QString str = ui->content_widgets->currentWidget()->objectName();
-                    QString filename = str.mid(str.indexOf("_") + 1, str.lastIndexOf("_") - str.indexOf("_") - 1);
-
-                    jreadwrite.writeTask(filename,text);
-                }
-        case 2: {//step
-
-                    QObject* parent_frame = newwidget->parent();
-                    QObject* task_frame = parent_frame->parent();
-
-                    //create the substring of taskname
-                    QString str_t = task_frame->objectName();
-                    QString taskname = str_t.mid(str_t.indexOf("_") + 1, str_t.lastIndexOf("_") - str_t.indexOf("_") - 1);
-                    //create the substring of the filename
-                    QString str_f = ui->content_widgets->currentWidget()->objectName();
-                    QString filename = str_f.mid(str_f.indexOf("_") + 1, str_f.lastIndexOf("_") - str_f.indexOf("_") - 1);
-
-                    QString stepname = text;
-
-                    jreadwrite.writeStep(filename,taskname,stepname);
-                }
-    }
-}
-
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-    //qDebug() << newwidget;qDebug() << oldframe;
+    JsonReaderWriter json;
+    int success = 0, widget_t = -1;
+
     if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter){
 
-        QString text = lineEdit->text();
+        // this is for the Line Edit
+        switch(editType)
+        {
 
-        if(!(text.trimmed().isEmpty())){
-            addbtnType(text);
-            lineEdit->setText("");
+            case 0: {   // new list
+                        // creating the new list file name by the new_edit text
+
+                        QString filename = new_edit->text();
+
+                        if (filename != "") {
+                            json.createList(filename);
+                            //!! add a success message if it succesfully created
+                            widget_t = 2;
+                            success = 1;
+
+                        }
+                        break;
+                    }
+            case 1: {   // new task
+                        // creating the new task name by the new_edit text
+
+                        QString filename = getFilename(ui->content_widgets->currentWidget());
+                        QString taskname = new_edit->text();
+
+                        if (taskname != "") {
+                            json.writeTask(filename,taskname);
+                            //!! add a success message
+                            widget_t = 10;
+                            success = 1;
+                        }
+                        break;
+
+                    }
+            case 2: {   // new step
+
+                        //get the names
+                        QString filename = getFilename(ui->content_widgets->currentWidget());
+                        QString taskname = currentTask;
+                        QString stepname = new_edit->text();
+
+                        //if not empty
+                        if (stepname != "") {
+
+                            json.writeStep(filename,taskname,stepname);
+                            //!! add a success message
+                            widget_t = 14;
+                            success = 1;
+                        }
+                        break;
+
+                    }
+            case 3: {   // edit step name !!todo
+
+                        //get the names
+                        QString filename = getFilename(ui->content_widgets->currentWidget());
+                        QString taskname = currentTask;
+                        QString stepname = currentStepname;
+                        QString newname = new_edit->text();
+
+                        if(stepname != newname && newname != "") {
+
+                            json.editStepName(filename,taskname,stepname,newname);
+                            //!! add a success message
+                            widget_t = 12;
+                            //success = 1;
+                        }
+                        break;
+
+                    }
+            case 4: {   // edit list name !!todo
+
+                        //get the names
+                        QString filename = currentListname;
+                        QString key = "title";
+                        QString value = new_edit->text();
+
+                        if (value != "") {
+
+                            json.editList(filename,key,value);
+                            //!! add a success message
+                            widget_t = 15;
+                            //success = 1;
+                        }
+                        break;
+                    }
+            case 5: {   // edit task name !!todo
+
+                        //get the names
+                        QString filename = getFilename(ui->content_widgets->currentWidget());
+                        QString taskname = currentTaskname;
+                        QString newname = new_edit->text();
+
+                        if (newname != currentTaskname && newname != "") {
+
+                            json.editTaskName(filename,taskname,newname);
+                            qDebug() << "yo";
+                            //!! add a success message
+                            widget_t = 16;
+                            //success = 1;
+                        }
+                        break;
+                    }
+            default: break;
         }
 
-        layout->replaceWidget(newwidget,oldframe);
-        oldframe->setVisible(true);
-        prev_obj = nullptr;
-        delete newwidget;
-        newwidget = nullptr;
-        oldframe = nullptr;
-
-
-
+        //reset !!todo fix the {edits}
+        if (success) {
+            btnEffectsOut(widget_t,new_edit->parent());
+            new_edit->setReadOnly(true);
+            new_edit->clearFocus();
+            new_edit->clear();
+            new_edit = nullptr;
+            prev_obj = nullptr;
+            editType = -1;
+        }
     }
 }
 
@@ -808,14 +914,11 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
 {
 
     if (event->button() == Qt::LeftButton) {
-        // Left mouse button clicked
 
-        if(!(ui->splitter->widget(2)->isHidden()) && !InThirdPanel)
-            ui->splitter->widget(2)->hide();
+        if (!(ui->splitter->widget(2)->isHidden()) && !InThirdPanel) ui->splitter->widget(2)->hide();
 
-        if(newwidget != nullptr){
-            keyPressEvent(new QKeyEvent(QKeyEvent::KeyPress, Qt::Key_Enter, Qt::NoModifier));
-        }
+        if (editType != -1) keyPressEvent(new QKeyEvent(QKeyEvent::KeyPress, Qt::Key_Enter, Qt::NoModifier));
+
     }
 
 }

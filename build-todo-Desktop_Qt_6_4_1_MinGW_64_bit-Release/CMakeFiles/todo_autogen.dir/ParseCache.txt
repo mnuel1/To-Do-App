@@ -287,6 +287,7 @@ C:/Users/Manuel Marin/Desktop/man/proj/todo/todo/hovereffect.h
  mdp:D:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/vadefs.h
  mdp:D:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wchar.h
  mdp:D:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wctype.h
+C:/Users/Manuel Marin/Desktop/man/proj/todo/todo/jsonReaderWriter.h
 C:/Users/Manuel Marin/Desktop/man/proj/todo/todo/newlist.h
  mmc:Q_OBJECT
  mdp:C:/Users/Manuel Marin/Desktop/man/proj/todo/todo/newlist.h
@@ -794,7 +795,6 @@ C:/Users/Manuel Marin/Desktop/man/proj/todo/todo/newlist.h
  mdp:D:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/vadefs.h
  mdp:D:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wchar.h
  mdp:D:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wctype.h
-C:/Users/Manuel Marin/Desktop/man/proj/todo/todo/jsonReaderWriter.h
 C:/Users/Manuel Marin/Desktop/man/proj/todo/todo/liststructure.h
 C:/Users/Manuel Marin/Desktop/man/proj/todo/todo/mainwindow.h
  mmc:Q_OBJECT
@@ -1345,6 +1345,7 @@ C:/Users/Manuel Marin/Desktop/man/proj/todo/todo/mainwindow.h
  mdp:D:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/vadefs.h
  mdp:D:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wchar.h
  mdp:D:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wctype.h
+C:/Users/Manuel Marin/Desktop/man/proj/todo/todo/mainwindowheaders.h
 C:/Users/Manuel Marin/Desktop/man/proj/todo/todo/pagecreator.h
  mmc:Q_OBJECT
  mdp:C:/Users/Manuel Marin/Desktop/man/proj/todo/todo/pagecreator.h
@@ -1837,11 +1838,10 @@ C:/Users/Manuel Marin/Desktop/man/proj/todo/todo/pagecreator.h
  mdp:D:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/vadefs.h
  mdp:D:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wchar.h
  mdp:D:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wctype.h
-C:/Users/Manuel Marin/Desktop/man/proj/todo/todo/mainwindowheaders.h
+C:/Users/Manuel Marin/Desktop/man/proj/todo/todo/pagecreatorlib.h
+C:/Users/Manuel Marin/Desktop/man/proj/todo/todo/main.cpp
 C:/Users/Manuel Marin/Desktop/man/proj/todo/todo/mainwindow.cpp
  uic:./ui_mainwindow.h
-C:/Users/Manuel Marin/Desktop/man/proj/todo/todo/main.cpp
-C:/Users/Manuel Marin/Desktop/man/proj/todo/todo/pagecreatorlib.h
 C:/Users/Manuel Marin/Desktop/man/proj/todo/todo/usersettings.h
 C:/Users/Manuel Marin/Desktop/man/proj/todo/todo/windowctrl.h
  mmc:Q_OBJECT

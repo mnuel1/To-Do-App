@@ -1,16 +1,30 @@
 # ninja log v5
+1443	5371	7050078613453458	CMakeFiles/todo.dir/main.cpp.obj	4e0fd94fa32a98a1
 1	1319	7050078571397763	todo_autogen/timestamp	55a8020e43c810cb
 1	1319	7050078571397763	todo_autogen/mocs_compilation.cpp	55a8020e43c810cb
 1	1319	7050078571397763	C:/Users/Manuel Marin/Desktop/man/proj/todo/build-todo-Desktop_Qt_6_4_1_MinGW_64_bit-Release/todo_autogen/timestamp	55a8020e43c810cb
-1	1319	7050078571397763	C:/Users/Manuel Marin/Desktop/man/proj/todo/build-todo-Desktop_Qt_6_4_1_MinGW_64_bit-Release/todo_autogen/mocs_compilation.cpp	55a8020e43c810cb
-1319	1433	7050078574000873	todo_autogen/EWIEGA46WW/qrc_resource.cpp	879294160da0bd38
-1319	1433	7050078574000873	C:/Users/Manuel Marin/Desktop/man/proj/todo/build-todo-Desktop_Qt_6_4_1_MinGW_64_bit-Release/todo_autogen/EWIEGA46WW/qrc_resource.cpp	879294160da0bd38
-1466	2896	7050078588694851	CMakeFiles/todo.dir/todo_autogen/EWIEGA46WW/qrc_resource.cpp.obj	48984e8d722ae2
 1447	3359	7050078593330657	CMakeFiles/todo.dir/hovereffect.cpp.obj	b8a18e7303194b9f
-1456	4211	7050078601749109	CMakeFiles/todo.dir/windowctrl.cpp.obj	19e67e067da5148
+1319	1433	7050078574000873	todo_autogen/EWIEGA46WW/qrc_resource.cpp	879294160da0bd38
+1	1319	7050078571397763	C:/Users/Manuel Marin/Desktop/man/proj/todo/build-todo-Desktop_Qt_6_4_1_MinGW_64_bit-Release/todo_autogen/mocs_compilation.cpp	55a8020e43c810cb
+1319	1433	7050078574000873	C:/Users/Manuel Marin/Desktop/man/proj/todo/build-todo-Desktop_Qt_6_4_1_MinGW_64_bit-Release/todo_autogen/EWIEGA46WW/qrc_resource.cpp	879294160da0bd38
 1461	4879	7050078608502445	CMakeFiles/todo.dir/jsonReaderWriter.cpp.obj	15fe8a2ac08d3060
-1443	5371	7050078613453458	CMakeFiles/todo.dir/main.cpp.obj	4e0fd94fa32a98a1
+1466	2896	7050078588694851	CMakeFiles/todo.dir/todo_autogen/EWIEGA46WW/qrc_resource.cpp.obj	48984e8d722ae2
+1456	4211	7050078601749109	CMakeFiles/todo.dir/windowctrl.cpp.obj	19e67e067da5148
 1434	5492	7050078614657916	CMakeFiles/todo.dir/todo_autogen/mocs_compilation.cpp.obj	9bc515f1c8fcf65f
 1451	6369	7050078623359567	CMakeFiles/todo.dir/pagecreator.cpp.obj	ec69211d09f12a62
 1440	10811	7050078667756354	CMakeFiles/todo.dir/mainwindow.cpp.obj	b35bbc476daf3928
 10812	11293	7050078672546270	todo.exe	56fc577f25236280
+2	1519	7054475928163827	build.ninja	acf1a5bc7f0519cc
+14	927	7054475936860264	todo_autogen/timestamp	55a8020e43c810cb
+14	927	7054475936860264	todo_autogen/mocs_compilation.cpp	55a8020e43c810cb
+14	927	7054475936860264	C:/Users/Manuel Marin/Desktop/man/proj/todo/build-todo-Desktop_Qt_6_4_1_MinGW_64_bit-Release/todo_autogen/timestamp	55a8020e43c810cb
+14	927	7054475936860264	C:/Users/Manuel Marin/Desktop/man/proj/todo/build-todo-Desktop_Qt_6_4_1_MinGW_64_bit-Release/todo_autogen/mocs_compilation.cpp	55a8020e43c810cb
+927	1040	7054475939392010	todo_autogen/EWIEGA46WW/qrc_resource.cpp	879294160da0bd38
+927	1040	7054475939392010	C:/Users/Manuel Marin/Desktop/man/proj/todo/build-todo-Desktop_Qt_6_4_1_MinGW_64_bit-Release/todo_autogen/EWIEGA46WW/qrc_resource.cpp	879294160da0bd38
+1073	2300	7054475952050600	CMakeFiles/todo.dir/todo_autogen/EWIEGA46WW/qrc_resource.cpp.obj	48984e8d722ae2
+1047	4088	7054475969920767	CMakeFiles/todo.dir/jsonReaderWriter.cpp.obj	15fe8a2ac08d3060
+1041	4604	7054475975089145	CMakeFiles/todo.dir/main.cpp.obj	4e0fd94fa32a98a1
+1055	4825	7054475977289755	CMakeFiles/todo.dir/todo_autogen/mocs_compilation.cpp.obj	9bc515f1c8fcf65f
+1068	5586	7054475984909245	CMakeFiles/todo.dir/pagecreator.cpp.obj	ec69211d09f12a62
+1061	10345	7054476032495271	CMakeFiles/todo.dir/mainwindow.cpp.obj	b35bbc476daf3928
+10346	10629	7054476035281211	todo.exe	56fc577f25236280

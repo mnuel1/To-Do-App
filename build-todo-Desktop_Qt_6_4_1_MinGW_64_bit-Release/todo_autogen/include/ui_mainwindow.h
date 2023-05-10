@@ -15,6 +15,7 @@
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
@@ -39,7 +40,6 @@ public:
     QPushButton *maxi_btn;
     QPushButton *exit_btn;
     QSpacerItem *horizontalSpacer;
-    QPushButton *pushButton_18;
     QPushButton *pushButton_12;
     QPushButton *pushButton_17;
     QFrame *body;
@@ -74,7 +74,7 @@ public:
     QFrame *men2_newlist_btn;
     QHBoxLayout *horizontalLayout_13;
     QPushButton *pushButton_16;
-    QPushButton *new_btn;
+    QLineEdit *lineEdit;
     QFrame *content;
     QVBoxLayout *verticalLayout_18;
     QStackedWidget *content_widgets;
@@ -101,7 +101,7 @@ public:
     QFrame *add10_Today;
     QHBoxLayout *horizontalLayout_15;
     QPushButton *pushButton_5;
-    QLabel *label_2;
+    QLineEdit *lineEdit_2;
     QWidget *men1_Planned_page;
     QVBoxLayout *verticalLayout_2;
     QFrame *frame_13;
@@ -127,7 +127,7 @@ public:
     QFrame *add10_Planned;
     QHBoxLayout *horizontalLayout_17;
     QPushButton *pushButton_7;
-    QLabel *label_6;
+    QLineEdit *lineEdit_3;
     QWidget *men1_Important_page;
     QVBoxLayout *verticalLayout_3;
     QFrame *frame_10;
@@ -153,7 +153,7 @@ public:
     QFrame *add10_Important;
     QHBoxLayout *horizontalLayout_16;
     QPushButton *pushButton_6;
-    QLabel *label_5;
+    QLineEdit *lineEdit_4;
     QWidget *men1_Settings_page;
     QFrame *third_panel;
     QVBoxLayout *third_panel_info;
@@ -331,11 +331,6 @@ public:
 
         horizontalLayout_4->addItem(horizontalSpacer);
 
-        pushButton_18 = new QPushButton(titlebar);
-        pushButton_18->setObjectName("pushButton_18");
-
-        horizontalLayout_4->addWidget(pushButton_18);
-
         pushButton_12 = new QPushButton(titlebar);
         pushButton_12->setObjectName("pushButton_12");
         pushButton_12->setStyleSheet(QString::fromUtf8("border:0px"));
@@ -394,7 +389,7 @@ public:
         scrollArea_4->setWidgetResizable(true);
         scrollAreaWidgetContents_3 = new QWidget();
         scrollAreaWidgetContents_3->setObjectName("scrollAreaWidgetContents_3");
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 223, 565));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 223, 555));
         verticalLayout_7 = new QVBoxLayout(scrollAreaWidgetContents_3);
         verticalLayout_7->setObjectName("verticalLayout_7");
         verticalLayout_7->setContentsMargins(5, 0, 5, -1);
@@ -575,6 +570,7 @@ public:
         men2_newlist_btn->setFrameShape(QFrame::StyledPanel);
         men2_newlist_btn->setFrameShadow(QFrame::Raised);
         horizontalLayout_13 = new QHBoxLayout(men2_newlist_btn);
+        horizontalLayout_13->setSpacing(0);
         horizontalLayout_13->setObjectName("horizontalLayout_13");
         horizontalLayout_13->setContentsMargins(-1, 0, -1, 0);
         pushButton_16 = new QPushButton(men2_newlist_btn);
@@ -588,22 +584,22 @@ public:
 
         horizontalLayout_13->addWidget(pushButton_16);
 
-        new_btn = new QPushButton(men2_newlist_btn);
-        new_btn->setObjectName("new_btn");
-        new_btn->setFont(font1);
-        new_btn->setCursor(QCursor(Qt::PointingHandCursor));
-        new_btn->setStyleSheet(QString::fromUtf8("border-radius:15;\n"
-"padding:1px;\n"
+        lineEdit = new QLineEdit(men2_newlist_btn);
+        lineEdit->setObjectName("lineEdit");
+        lineEdit->setFont(font2);
+        lineEdit->setCursor(QCursor(Qt::PointingHandCursor));
+        lineEdit->setStyleSheet(QString::fromUtf8("border-radius:15;\n"
+"padding:5px;\n"
 "text-align:left;\n"
-""));
-        new_btn->setIconSize(QSize(30, 30));
+"color:white;"));
+        lineEdit->setReadOnly(true);
 
-        horizontalLayout_13->addWidget(new_btn);
+        horizontalLayout_13->addWidget(lineEdit);
 
-        horizontalLayout_13->setStretch(1, 1);
 
         menu_layout->addWidget(men2_newlist_btn);
 
+        menu_layout->setStretch(0, 1);
         splitter->addWidget(menu);
         content = new QFrame(splitter);
         content->setObjectName("content");
@@ -716,7 +712,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName("scrollAreaWidgetContents");
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 438, 391));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 438, 389));
         scrollAreaWidgetContents->setStyleSheet(QString::fromUtf8(""));
         verticalLayout_9 = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout_9->setSpacing(6);
@@ -744,14 +740,17 @@ public:
 
         add10_Today = new QFrame(frame_2);
         add10_Today->setObjectName("add10_Today");
+        add10_Today->setCursor(QCursor(Qt::PointingHandCursor));
         add10_Today->setStyleSheet(QString::fromUtf8("text-align:left;padding:10px;border-radius:5px;background:white;color:black;"));
         add10_Today->setFrameShape(QFrame::StyledPanel);
         add10_Today->setFrameShadow(QFrame::Raised);
         horizontalLayout_15 = new QHBoxLayout(add10_Today);
+        horizontalLayout_15->setSpacing(0);
         horizontalLayout_15->setObjectName("horizontalLayout_15");
         horizontalLayout_15->setContentsMargins(9, 0, 9, 0);
         pushButton_5 = new QPushButton(add10_Today);
         pushButton_5->setObjectName("pushButton_5");
+        pushButton_5->setCursor(QCursor(Qt::PointingHandCursor));
         pushButton_5->setStyleSheet(QString::fromUtf8("border-radius:15;padding: 1px;"));
         QIcon icon8;
         icon8.addFile(QString::fromUtf8(":/i/resources/icons/plus.png"), QSize(), QIcon::Normal, QIcon::Off);
@@ -760,20 +759,22 @@ public:
 
         horizontalLayout_15->addWidget(pushButton_5);
 
-        label_2 = new QLabel(add10_Today);
-        label_2->setObjectName("label_2");
-        label_2->setFont(font2);
-        label_2->setStyleSheet(QString::fromUtf8("border-radius:15;\n"
+        lineEdit_2 = new QLineEdit(add10_Today);
+        lineEdit_2->setObjectName("lineEdit_2");
+        lineEdit_2->setFont(font2);
+        lineEdit_2->setCursor(QCursor(Qt::PointingHandCursor));
+        lineEdit_2->setStyleSheet(QString::fromUtf8("border-radius:15;\n"
 "padding:5px;\n"
 "text-align:left;\n"
-""));
+"color:black;"));
+        lineEdit_2->setReadOnly(true);
 
-        horizontalLayout_15->addWidget(label_2);
+        horizontalLayout_15->addWidget(lineEdit_2);
 
-        horizontalLayout_15->setStretch(1, 1);
 
         verticalLayout_8->addWidget(add10_Today);
 
+        verticalLayout_8->setStretch(0, 1);
 
         verticalLayout_5->addWidget(frame_2);
 
@@ -880,7 +881,7 @@ public:
         scrollArea_2->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName("scrollAreaWidgetContents_2");
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 438, 387));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 438, 385));
         verticalLayout_6 = new QVBoxLayout(scrollAreaWidgetContents_2);
         verticalLayout_6->setSpacing(0);
         verticalLayout_6->setObjectName("verticalLayout_6");
@@ -911,6 +912,7 @@ public:
         add10_Planned->setFrameShape(QFrame::StyledPanel);
         add10_Planned->setFrameShadow(QFrame::Raised);
         horizontalLayout_17 = new QHBoxLayout(add10_Planned);
+        horizontalLayout_17->setSpacing(0);
         horizontalLayout_17->setObjectName("horizontalLayout_17");
         horizontalLayout_17->setContentsMargins(9, 0, 9, 0);
         pushButton_7 = new QPushButton(add10_Planned);
@@ -921,19 +923,18 @@ public:
 
         horizontalLayout_17->addWidget(pushButton_7);
 
-        label_6 = new QLabel(add10_Planned);
-        label_6->setObjectName("label_6");
-        sizePolicy.setHeightForWidth(label_6->sizePolicy().hasHeightForWidth());
-        label_6->setSizePolicy(sizePolicy);
-        label_6->setFont(font2);
-        label_6->setStyleSheet(QString::fromUtf8("border-radius:15;\n"
+        lineEdit_3 = new QLineEdit(add10_Planned);
+        lineEdit_3->setObjectName("lineEdit_3");
+        lineEdit_3->setFont(font2);
+        lineEdit_3->setCursor(QCursor(Qt::PointingHandCursor));
+        lineEdit_3->setStyleSheet(QString::fromUtf8("border-radius:15;\n"
 "padding:5px;\n"
 "text-align:left;\n"
-""));
+"color:black;"));
+        lineEdit_3->setReadOnly(true);
 
-        horizontalLayout_17->addWidget(label_6);
+        horizontalLayout_17->addWidget(lineEdit_3);
 
-        horizontalLayout_17->setStretch(1, 1);
 
         verticalLayout_20->addWidget(add10_Planned);
 
@@ -1041,7 +1042,7 @@ public:
         scrollArea_3->setWidgetResizable(true);
         scrollAreaWidgetContents_4 = new QWidget();
         scrollAreaWidgetContents_4->setObjectName("scrollAreaWidgetContents_4");
-        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 438, 387));
+        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 438, 385));
         verticalLayout_11 = new QVBoxLayout(scrollAreaWidgetContents_4);
         verticalLayout_11->setSpacing(0);
         verticalLayout_11->setObjectName("verticalLayout_11");
@@ -1071,6 +1072,7 @@ public:
         add10_Important->setFrameShape(QFrame::StyledPanel);
         add10_Important->setFrameShadow(QFrame::Raised);
         horizontalLayout_16 = new QHBoxLayout(add10_Important);
+        horizontalLayout_16->setSpacing(0);
         horizontalLayout_16->setObjectName("horizontalLayout_16");
         horizontalLayout_16->setContentsMargins(9, 0, 9, 0);
         pushButton_6 = new QPushButton(add10_Important);
@@ -1081,17 +1083,18 @@ public:
 
         horizontalLayout_16->addWidget(pushButton_6);
 
-        label_5 = new QLabel(add10_Important);
-        label_5->setObjectName("label_5");
-        label_5->setFont(font2);
-        label_5->setStyleSheet(QString::fromUtf8("border-radius:15;\n"
+        lineEdit_4 = new QLineEdit(add10_Important);
+        lineEdit_4->setObjectName("lineEdit_4");
+        lineEdit_4->setFont(font2);
+        lineEdit_4->setCursor(QCursor(Qt::PointingHandCursor));
+        lineEdit_4->setStyleSheet(QString::fromUtf8("border-radius:15;\n"
 "padding:5px;\n"
 "text-align:left;\n"
-""));
+"color:black;"));
+        lineEdit_4->setReadOnly(true);
 
-        horizontalLayout_16->addWidget(label_5);
+        horizontalLayout_16->addWidget(lineEdit_4);
 
-        horizontalLayout_16->setStretch(1, 1);
 
         verticalLayout_10->addWidget(add10_Important);
 
@@ -1176,7 +1179,6 @@ public:
         mini_btn->setText(QString());
         maxi_btn->setText(QString());
         exit_btn->setText(QString());
-        pushButton_18->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
         pushButton_12->setText(QString());
         pushButton_17->setText(QString());
         men0_nav_btn->setText(QString());
@@ -1187,18 +1189,22 @@ public:
         pushButton_15->setText(QString());
         planned->setText(QCoreApplication::translate("MainWindow", "Planned", nullptr));
         pushButton_16->setText(QString());
-        new_btn->setText(QCoreApplication::translate("MainWindow", "New List", nullptr));
+        lineEdit->setText(QString());
+        lineEdit->setPlaceholderText(QCoreApplication::translate("MainWindow", "New List", nullptr));
         men0_btn->setText(QString());
         label->setText(QCoreApplication::translate("MainWindow", "Today", nullptr));
         day_date->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         set3_Today->setText(QString());
-        label_2->setText(QCoreApplication::translate("MainWindow", "Add Task", nullptr));
+        lineEdit_2->setText(QString());
+        lineEdit_2->setPlaceholderText(QCoreApplication::translate("MainWindow", "Add Task", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindow", "Planned", nullptr));
         set3_Planned->setText(QString());
-        label_6->setText(QCoreApplication::translate("MainWindow", "Add Task", nullptr));
+        lineEdit_3->setText(QString());
+        lineEdit_3->setPlaceholderText(QCoreApplication::translate("MainWindow", "Add Task", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "Important", nullptr));
         set3_Important->setText(QString());
-        label_5->setText(QCoreApplication::translate("MainWindow", "Add Task", nullptr));
+        lineEdit_4->setText(QString());
+        lineEdit_4->setPlaceholderText(QCoreApplication::translate("MainWindow", "Add Task", nullptr));
     } // retranslateUi
 
 };

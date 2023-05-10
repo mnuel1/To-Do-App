@@ -60,7 +60,6 @@ QLabel* PageCreator::create_label(
     QLabel* label = new QLabel(text);
     label->setFont(font);
 
-
     return label;
 
 }
@@ -111,21 +110,23 @@ QFrame* PageCreator::create_header_form(QString name)
     title_holder_layout->setSpacing(0);
 
     //form components
-    QPushButton* icon = new QPushButton(defaultFile.circle_icon,"");
+    QPushButton* icon = new QPushButton;
+    icon->setText("");
     icon->setCursor(Qt::PointingHandCursor);
     icon->setObjectName("ico11_" + name);
     icon->setIconSize(defaultFile.size);
     icon->setStyleSheet("border-radius:5; padding:10px;");
     icon->installEventFilter(hoverEventFilter); // if clicked, pop up a box of icons
+    icon->hide(); //hide it since there is no icon
 
 
     //title text
     QLineEdit* text_edit = new QLineEdit;
-    text_edit->setObjectName("ted12_" + name);
+    text_edit->setObjectName("ted15_" + name);
     text_edit->setCursor(Qt::IBeamCursor);
     text_edit->setText(name);
     text_edit->setFont(defaultFile.header_font);
-    text_edit->setStyleSheet("padding:6px;border-radius:5;");
+    text_edit->setStyleSheet("padding:6px;border-radius:2;");
     text_edit->setReadOnly(true);
     text_edit->installEventFilter(hoverEventFilter);
 
@@ -262,10 +263,10 @@ QFrame* PageCreator::create_addtaskbtn(QString name)
     icon->setIcon(defaultFile.add_b_icon);
     icon->setIconSize(defaultFile.size2);
 
-    QLabel* text = new QLabel;
-    text->setCursor(Qt::IBeamCursor);
+    QLineEdit* text = new QLineEdit;
+    text->setPlaceholderText("Add Task");
+    text->setCursor(Qt::PointingHandCursor);
     text->setStyleSheet("border-radius:15;\npadding:5px;\ntext-align:left;\n");
-    text->setText("Add Task");
     text->setFont(defaultFile.btn_font);
 
     add_btn_l->addWidget(icon,0);
@@ -441,12 +442,16 @@ void PageCreator::files_adder(QJsonArray files,
 QFrame* PageCreator::create_step(QString text,bool is_mainstep,bool is_done, bool is_imp)
 {
     QFrame* step = new QFrame;
+    step->setObjectName("step16_" + text);
+    step->installEventFilter(hoverEventFilter);
+    step->setStyleSheet("padding:6px;border-radius:2;");
+    step->setCursor(Qt::PointingHandCursor);
 
     QHBoxLayout* step_l = new QHBoxLayout;
 
     if(!is_mainstep){
         step_l->setContentsMargins(12,9,12,9);
-        step->setObjectName("mains_" + text);
+        step->setObjectName("step12_" + text);
     }
 
     QSize size = is_mainstep ? defaultFile.size1 : defaultFile.size2;
@@ -466,9 +471,7 @@ QFrame* PageCreator::create_step(QString text,bool is_mainstep,bool is_done, boo
 
     QLineEdit* step_text = new QLineEdit;
     step_text->setObjectName("tex12_" + text);
-    step_text->installEventFilter(hoverEventFilter);
-    step_text->setStyleSheet("text-align:left;");
-    step_text->setCursor(Qt::IBeamCursor);
+    step_text->setStyleSheet("text-align:left;padding:2px;border-radius:2;");
     step_text->setFont(font);
     step_text->setText(text);
     step_text->setReadOnly(true);
@@ -812,6 +815,7 @@ QFrame* PageCreator::create_task_panel(QJsonObject obj)
 
     QVBoxLayout* task_panel_layout = new QVBoxLayout;
     task_panel_layout->setContentsMargins(5,5,5,5);
+    task_panel_layout->setSpacing(5);
 
     //add a steps holder
     QFrame* steps_holder = new QFrame;
@@ -819,6 +823,7 @@ QFrame* PageCreator::create_task_panel(QJsonObject obj)
 
     QVBoxLayout* steps_holder_layout = new QVBoxLayout;
     steps_holder_layout->setContentsMargins(6,6,6,6);
+    steps_holder_layout->setSpacing(0);
 
     //create a mainstep
     steps_holder_layout->addWidget(create_step(tasks.task_name,1,tasks.is_done,tasks.is_important));
